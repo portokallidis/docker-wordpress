@@ -32,7 +32,7 @@ RUN a2enmod headers
 
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html 
 
-ADD /mnt/nas-backups/carre_backups/www_backups/$(ls -rt /mnt/nas-backups/carre_backups/www_backups/ | tail -1) /
+ADD /mnt/nas-backups/carre_backups/www_backups/site.2015-04-21-0425.tar.gz /
 
 RUN ln -s /www /var/www/html && chown -R www-data:www-data /app
 
