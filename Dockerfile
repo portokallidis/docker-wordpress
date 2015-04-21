@@ -30,13 +30,11 @@ RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/cli/php
 RUN a2enmod rewrite
 RUN a2enmod headers
 
-RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
+RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html 
 
-# Install vanilla wordpress
-ADD https://wordpress.org/latest.tar.gz /wordpress.tar.gz
-RUN tar xvzf /wordpress.tar.gz
-RUN cp -aR /wordpress/* /app
-RUN chown -R www-data:www-data /app
+ADD /mnt/nas-backups/carre_backups/www_backups/$(ls -rt /mnt/nas-backups/carre_backups/www_backups/ | tail -1) /
+
+RUN ln -s /www /var/www/html && chown -R www-data:www-data /app
 
 # Use our default config
 ADD wp-config.php /app/wp-config.php
